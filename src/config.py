@@ -13,12 +13,9 @@ class Settings(BaseSettings):
     VERSION: str = "0.0.1"
     PREFIX: str = "/api"
     DEFAULT_TIMEZONE: str = "Europe/Moscow"
-    LOGIN_USER: str = "{project_name}:login_user:{token}"
-    RESET_PASSWORD: str = "{project_name}:reset_password:{token}"
-    RESET_TOKEN_EXPIRE: int = 3600 * 24
-    SECRET_KEY: str = "my_secret_key"
-    ALGORITHM: str = "HS256"
     DOMAIN: str
+
+    ADMIN_PASSWORD: str
 
     # postgres
     POSTGRES_HOST: str = "localhost"
