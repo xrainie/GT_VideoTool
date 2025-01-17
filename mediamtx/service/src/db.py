@@ -56,17 +56,17 @@ class DBI:
         if self.conn is not None:
             await self.done()
 
-        result = False
+        result = True
 
-        try:
-            self.conn = await asyncpg.connect(self.dsn)    
-            self.stm_cameras_list = await self.conn.prepare("SELECT c.* FROM cameras c ORDER BY id")
-            result = True
-        except Exception as e:
-            logger.error(f"Can't establish connection to the database {self.dsn}, reason {e}")
-            self.conn = None
-            self.stm_cameras_list = None
-            pass
+        # try:
+        #     self.conn = await asyncpg.connect(self.dsn)
+        #     self.stm_cameras_list = await self.conn.prepare("SELECT c.* FROM cameras c ORDER BY id")
+        #     result = True
+        # except Exception as e:
+        #     logger.error(f"Can't establish connection to the database {self.dsn}, reason {e}")
+        #     self.conn = None
+        #     self.stm_cameras_list = None
+        #     pass
 
         return result
 
