@@ -76,7 +76,7 @@ class DBI:
         result = {}
 
         current_dir = Path(__file__).parent
-        parent_dir = current_dir.parent.parent
+        parent_dir = current_dir.parent.parent.parent
         file_path = parent_dir / "cameras.json"
 
         try:
