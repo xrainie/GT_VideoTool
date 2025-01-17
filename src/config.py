@@ -16,20 +16,6 @@ class Settings(BaseSettings):
     DOMAIN: str
 
     ADMIN_PASSWORD: str
-
-    # postgres
-    POSTGRES_HOST: str = "localhost"
-    POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str = "geotime"
-    POSTGRES_PASSWORD: str = "postgres"
-    POSTGRES_DB: str = "geotime"
-
-    POSTGRES_HOST_TEST: str = "0.0.0.0"
-    POSTGRES_PORT_TEST: int = 5432
-    POSTGRES_USER_TEST: str = "postgres"
-    POSTGRES_PASSWORD_TEST: str = "pass"
-    POSTGRES_DB_TEST: str = "db"
-
     # Redis
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6666
@@ -40,14 +26,6 @@ class Settings(BaseSettings):
     BROKER_QUEUE_NAME_PREFIX: str = "broker_sender_queue_"
     CLOSE_RECEIPT_QUEUE_NAME: str = "close_receipt_queue"
     DEFAULT_QUEUE_NAME: str = "default"
-
-    @property
-    def DATABASE_URL_psycopg(self):
-        return f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-
-    @property
-    def DATABASE_URL_TEST_psycopg(self):
-        return f"postgresql+psycopg://{self.POSTGRES_USER_TEST}:{self.POSTGRES_PASSWORD_TEST}@{self.POSTGRES_HOST_TEST}:{self.POSTGRES_PORT_TEST}/{self.POSTGRES_DB_TEST}"
 
     model_config = SettingsConfigDict(env_file="../.env")
 

@@ -1,4 +1,20 @@
 import re
+import json
+from pathlib import Path
+
+CAMERAS_PATH = Path("cameras.json")
+
+
+# Функция для чтения JSON из файла
+def read_json():
+    with open(CAMERAS_PATH, "r") as f:
+        return json.load(f)
+
+
+# Функция для записи JSON в файл
+def write_json(data):
+    with open(CAMERAS_PATH, "w") as f:
+        json.dump(data, f, indent=4)
 
 
 def update_config(camera_script_path, script_name):

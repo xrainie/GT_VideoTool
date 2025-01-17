@@ -7,6 +7,5 @@ class CameraSchema(BaseModel):
 
 
 class UpdateCameraSchema(BaseModel):
-    id: int
     name: str | None = None
     rtsp_url: str | None = None

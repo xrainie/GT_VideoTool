@@ -1,16 +1,25 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter
+from fastapi.exceptions import HTTPException
 
 from src.core.schemas.cameras import UpdateCameraSchema
-from src.models.cameras import Camera
-from src.services.cameras import CameraService
-from src.db import db_helper
+from src.utils import read_json, write_json
+
 
 router = APIRouter()
 
 
-@router.post("/update_camera")
-def update_camera(data: UpdateCameraSchema, db: Session = Depends(db_helper.get_db)):
-    camera_service = CameraService(db=db)
-    camera = camera_service.update_camera(data.id, data.name, data.rtsp_url)
-    return camera
+@router.post("/update_camera/{camera_id}")
+def update_camera(camera_id: str, camera_data: UpdateCameraSchema):
+    data = read_json()
+    data[camera_id] = camera_data.model_dump()
+    write_json(data)
+    return {"message": f"Camera {camera_id} updated successfully", "data": data}
+
+
+# Получить данные по одной камере
+@router.get("/cameras/{camera_id}")
+async def get_camera(camera_id: str):
+    data = read_json()
+    if camera_id not in data:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    return data[camera_id]

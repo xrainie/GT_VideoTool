@@ -1,6 +1,4 @@
 from sqlalchemy.orm import Session
-
-from src.models.cameras import Camera
 from src.core.schemas.cameras import UpdateCameraSchema
 
 

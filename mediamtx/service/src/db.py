@@ -1,3 +1,4 @@
+import json
 import logging
 import asyncpg
 
@@ -72,18 +73,15 @@ class DBI:
     async def get_camera_urls(self):
         result = {}
 
-        if self.stm_cameras_list is None:
-            await self.connect()
-
         try:
-            cameras = await self.stm_cameras_list.fetch()
-            # logger.debug(f"Cameras is {cameras}")
-            result = convert_cameras_list(cameras)
-            # logger.debug(f"Processed list is {result}")
+            with open("cameras.json", "r") as f:
+                data = json.load(f)
+                for k, v in data.items():
+                    result[k] = {"camera_type": v["name"], "url": v["rtsp_url"]}
         except Exception as e:
             logger.error(f"Can't get camera's list, reason {e}")
             self.stm_cameras_list = None
-        
+
         return result
 
     async def done(self):
