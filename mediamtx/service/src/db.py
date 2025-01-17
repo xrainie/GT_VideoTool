@@ -77,7 +77,7 @@ class DBI:
             with open("cameras.json", "r") as f:
                 data = json.load(f)
                 for k, v in data.items():
-                    if v["url"]:
+                    if v["rtsp_url"]:
                         result[k] = {"camera_type": v["name"], "url": v["rtsp_url"]}
         except Exception as e:
             logger.error(f"Can't get camera's list, reason {e}")
