@@ -1,6 +1,8 @@
 import json
 import logging
+import os
 import asyncpg
+from pathlib import Path
 
 from typing import Optional, Any, Dict, List
 
@@ -73,8 +75,12 @@ class DBI:
     async def get_camera_urls(self):
         result = {}
 
+        current_dir = Path(__file__).parent
+        parent_dir = current_dir.parent.parent
+        file_path = parent_dir / "cameras.json"
+
         try:
-            with open("cameras.json", "r") as f:
+            with open(file_path, "r") as f:
                 data = json.load(f)
                 for k, v in data.items():
                     if v["rtsp_url"]:
