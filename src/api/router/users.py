@@ -65,7 +65,7 @@ from src.config import settings
 from src.core.schemas.users import PasswordUserSchema, ChangePasswordSchema
 
 
-router = APIRouter()
+router = APIRouter(tags=["Users"])
 
 
 @router.post("/login")

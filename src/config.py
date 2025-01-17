@@ -30,6 +30,17 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD_TEST: str = "pass"
     POSTGRES_DB_TEST: str = "db"
 
+    # Redis
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6666
+
+    # Celery
+    CELERY_BROKER: str = f"redis://{REDIS_HOST}:{REDIS_PORT}/11"
+    CELERY_BACKEND: str = f"redis://{REDIS_HOST}:{REDIS_PORT}/12"
+    BROKER_QUEUE_NAME_PREFIX: str = "broker_sender_queue_"
+    CLOSE_RECEIPT_QUEUE_NAME: str = "close_receipt_queue"
+    DEFAULT_QUEUE_NAME: str = "default"
+
     @property
     def DATABASE_URL_psycopg(self):
         return f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
