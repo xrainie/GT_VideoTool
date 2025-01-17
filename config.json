@@ -1,0 +1,6 @@
+{
+    "ADMIN_PASSWORD": "testpass",
+    "OBJECT_NAME": "test_name",
+    "CENTRAL_SERVER_IP": "1.1.1.1",
+    "VIDEO_DIRECTORY": ""
+}
